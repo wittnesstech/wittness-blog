@@ -1,19 +1,21 @@
 <template>
   <div class="container-fluid">
-    <h1 class="m20">blog</h1>
+    <h1 class="m20">Blog</h1>
     <hr>
     <div v-for="article of articles" :key="article.slug">
-        <h3 class="mb10">
-          <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
-              {{ article.title.toLowerCase() }}
-          </NuxtLink>
-        </h3>
-        <p><em>{{ (article.date || article.createdAt) | moment("MMMM Do, YYYY") }}</em></p>
-        <p>{{ article.summary }}</p>
-        <p><NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">Read More</NuxtLink></p>
-        <br>
+      <h3 class="mb10">
+        <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }">
+          {{ article.title.toLowerCase() }}
+        </NuxtLink>
+      </h3>
+      <p><em>{{ (article.date || article.createdAt) | moment("MMMM Do, YYYY") }}</em></p>
+      <p>{{ article.summary }}</p>
+      <p>
+        <NuxtLink :to="{ name: 'blog-slug', params: { slug: article.slug } }"> More...</NuxtLink>
+      </p>
+      <br>
     </div>
-    <PrevNextPg :prevPg="prevPg" :nextPg="nextPg"/>
+    <PrevNextPg :prevPg="prevPg" :nextPg="nextPg" />
   </div>
 </template>
 
@@ -23,16 +25,18 @@ import PrevNextPg from "~/components/PrevNextPg.vue"
 
 export default {
   components: {
-      PrevNextPg
+    PrevNextPg
   },
   head() {
-      return {
+    return {
       // Adds a piped title if sitename is defined
       title: 'Blog' + (this.siteName ? ' | ' + this.siteName : ''),
       meta: [
-          { hid: 'description', 
-          name: 'description', 
-          content: (this.siteName ? this.siteName + ' ' : '') + 'Blog' }
+        {
+          hid: 'description',
+          name: 'description',
+          content: (this.siteName ? this.siteName + ' ' : '') + 'Blog'
+        }
       ]
     }
   },
@@ -44,24 +48,24 @@ export default {
     const pgNum = 1 // Since this is the first page of the blog
     const prevPg = null // No prevPg variable
     const articles = await $content('posts')
-      .only(['title', 'summary', 'slug','createdAt','date'])
+      .only(['title', 'summary', 'slug', 'createdAt', 'date'])
       .sortBy('date', 'desc')
-      .skip(postsPerPage*(pgNum-1))
+      .skip(postsPerPage * (pgNum - 1))
       .limit(postsPerPage)
       .fetch()
 
     // Get the next group of articles after this page
     const nextArticles = await $content('posts')
-      .only(['title', 'summary', 'slug','createdAt','date'])
+      .only(['title', 'summary', 'slug', 'createdAt', 'date'])
       .sortBy('date', 'desc')
-      .skip(postsPerPage*(pgNum))
+      .skip(postsPerPage * (pgNum))
       .limit(postsPerPage)
       .fetch()
-    
+
     // nextPg is null unless there are articles after this page
     let nextPg = null
     if (nextArticles.length >= 1) {
-        nextPg = pgNum + 1
+      nextPg = pgNum + 1
     }
 
     // Returns current page articles, as well as the prevPg, nextPg, and pgNum vars
