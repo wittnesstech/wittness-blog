@@ -7,7 +7,7 @@
       </h1>
       <div>
         The 
-        <a href="wittness.netlify.app" class="green">
+        <a href="https://wittness.netlify.app" class="green">
         main
           </a>
         site is no more under construction.
