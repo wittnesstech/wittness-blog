@@ -5,13 +5,13 @@
         <!-- Define Custom Site title or completely change the page -->
         Witt<span class="txt-color">ness </span>! Tech
       </h1>
-      <p>
+      <div>
         The 
         <a href="wittness.netlify.app" class="green">
         main
           </a>
         site is no more under construction.
-      </p>
+      </div>
       <!-- <a class="no-highlighter" href="https://github.com/gms64/nuxt-static-skeleton" target="_blank">
         <button class="button-primary">
           See the Repo
