@@ -6,7 +6,11 @@
         Witt<span class="txt-color">ness </span>! Tech
       </h1>
       <p>
-        The main site is under construction. . .
+        The 
+        <a href="wittness.netlify.app" class="green">
+        main
+          </a>
+        site is no more under construction.
       </p>
       <!-- <a class="no-highlighter" href="https://github.com/gms64/nuxt-static-skeleton" target="_blank">
         <button class="button-primary">
